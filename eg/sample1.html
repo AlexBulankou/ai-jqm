@@ -5,6 +5,11 @@
     <title>JQM with AppInsights Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <style type="text/css">
+        #stock-price {
+            font-size: 4em;
+        }
+    </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdn.rawgit.com/azicchetti/jquerymobile-router/v0.93/js/jquery.mobile.router.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -15,8 +20,19 @@
         window.router=new $.mobile.Router({   
               "#stock([?](\.+))?": { handler: function(type,args){
                   var stockSymbol = args[2].toUpperCase();
-            console.log(stockSymbol);
-            $("#stock-h1").html(stockSymbol);
+                   $("#stock-h1").html(stockSymbol);
+                  $.ajax(
+                    { 
+                        url:"http://finance.google.com/finance/info?client=ig&q="+stockSymbol, 
+                        jsonp:"callback", 
+                        dataType:"jsonp", 
+                        success:function(data){
+                        $("#stock-price").html(data[0].l_cur); 
+                    } 
+                    });
+                    
+                    console.log(stockSymbol);
+           
           }, events: "bs" }    
         }
         );
@@ -37,7 +53,7 @@
         <div role="main" class="ui-content">
            
                 <ul data-role="listview">
-                    <li><a href="#stock?appl">AAPL</a></li>
+                    <li><a href="#stock?aapl">AAPL</a></li>
                     <li><a href="#stock?amzn">AMZN</a></li>
                     <li><a href="#stock?goog">GOOG</a></li>
                     <li><a href="#stock?fb">FB</a></li>
@@ -63,7 +79,7 @@
         </div>
         <!-- /header -->
         <div role="main" class="ui-content">
-           
+           <div id="stock-price"></div>
         </div>
         <!-- /content -->
     </div>
