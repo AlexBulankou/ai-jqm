@@ -11,31 +11,52 @@
         }
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--
     <script src="https://cdn.rawgit.com/azicchetti/jquerymobile-router/v0.93/js/jquery.mobile.router.js"></script>
+    -->
+    
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <!-- https://github.com/azicchetti/jquerymobile-router -->
 
     <script type="text/javascript">
+    /*
         window.router=new $.mobile.Router({   
               "#stock([?](\.+))?": { handler: function(type,args){
                   var stockSymbol = args[2].toUpperCase();
                    $("#stock-h1").html(stockSymbol);
-                  $.ajax(
-                    { 
-                        url:"http://finance.google.com/finance/info?client=ig&q="+stockSymbol, 
-                        jsonp:"callback", 
-                        dataType:"jsonp", 
-                        success:function(data){
-                        $("#stock-price").html(data[0].l_cur); 
-                    } 
-                    });
+                    $.ajax(
+                        { 
+                            url:"http://finance.google.com/finance/info?client=ig&q="+stockSymbol, 
+                            jsonp:"callback", 
+                            dataType:"jsonp", 
+                            success:function(data){
+                            $("#stock-price").html(data[0].l_cur); 
+                        } 
+                        });
                     
                     console.log(stockSymbol);
            
-          }, events: "bs" }    
+          }, events: "s" }    
         }
-        );
+        );*/
+        
+        $(document).bind("pagebeforechange", function(e, data)
+        {
+            if (data.options && data.options.dataUrl && (typeof data.options.dataUrl) === "string")
+            {
+                console.log("starting page transition to:"+ data.options.dataUrl);
+            }
+            else if (data.toPage && (typeof data.toPage) === "string")
+            {
+                console.log("starting page transition to:"+ data.toPage);
+            }
+        });
+        
+         $(document).bind("pageshow", function(e, data)
+        {
+            console.log("completing page transition to:"+ e.currentTarget.URL);
+        });
         
         $.mobile.urlHistory = {};
     </script
