@@ -27,7 +27,7 @@
         var appInsights=window.appInsights||function(config){
             function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
         }({
-            instrumentationKey:"3978d426-d8b8-45c3-8cf4-3765011f92cf"
+            instrumentationKey:"ecae66ed-c433-4dfc-9261-ae90660c9354"
         });
         
         window.appInsights=appInsights;
@@ -60,7 +60,10 @@
           }, events: "s" },
            "#home": { handler: function(type,args){
               window.pageInfo = "#home";
-           }, events: "s"}
+           }, events: "s"},
+            "#dlg": { handler: function(type,args){
+              window.pageInfo = "#dlg";
+           }, events: "s"},
         }
         );
     </script
@@ -144,7 +147,7 @@
     
     <script type="text/javascript">
         $(".btn-track-exception").click(function(){
-           window.appInsights.trackException("Exception on ")+window.pageInfo;
+           window.appInsights.trackException("Exception on "+window.pageInfo);
         });
           $(".btn-track-event").click(function(){
               window.appInsights.trackEvent("MyCustomEvent",{pageInfo:window.pageInfo}); 
