@@ -1,7 +1,9 @@
 # ai-jqm
+##Summary
+##How to use it
 
-Page lifecyle in JQM:
 
+##Appendix A. Page lifecyle reference for JQM (copied from mobile router project)
 * bc  => pagebeforecreate
 * c   => pagecreate
 * i   => pageinit
