@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>JQM with AppInsights Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <style type="text/css">
-        #stock-price {
+        #stock-price,
+        #stock-price-change {
             font-size: 4em;
+        }
+        
+        .stock-price-plus {
+            color: green
+        }
+        
+        .stock-price-minus {
+            color: red
         }
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -26,22 +36,31 @@
     <script src="../scripts/ai-jqm.min.js"></script>
 
     <script type="text/javascript">
-      $.mobile.urlHistory = {};
+        $.mobile.urlHistory = {};
+        window.pageInfo = "";
         window.router=new $.mobile.Router({   
               "#stock([?](\.+))?": { handler: function(type,args){
                   var stockSymbol = args[2].toUpperCase();
+                   window.pageInfo = "#stock?"+stockSymbol;
                    $("#stock-h1").html(stockSymbol);
                     $.ajax(
                         { 
                             url:"http://stocksrv.azurewebsites.net/api/stock/"+stockSymbol, 
                             success:function(data){
-                            $("#stock-price").html(data[0].l_cur); 
+                                $("#stock-price").html(data[0].l_cur);
+                                $("#stock-price-change").html(data[0].c);                     
+                                $("#stock-price-change").attr("class", (parseFloat(data[0].c)>=0)? "stock-price-plus":"stock-price-minus");                         
+                                
+                                window.appInsights.trackTrace("Data for "+stockSymbol+": "+JSON.stringify(data));
                         } 
                         });
                     
-                    console.log(stockSymbol);
+                  
            
-          }, events: "s" }    
+          }, events: "s" },
+           "#home": { handler: function(type,args){
+              window.pageInfo = "#home";
+           }, events: "s"}
         }
         );
     </script
@@ -55,7 +74,7 @@
             <h1>JQM with AppInsights Demo</h1>
 
         </div> 
-        <!-- /header -->
+       
         <div role="main" class="ui-content">
            
                 <ul data-role="listview">
@@ -71,36 +90,73 @@
                 <p>
                     <a href="#dlg" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="flip">Open dialog</a>
                 </p>
+                  <div data-role="controlgroup" data-type="horizontal">
+            <button class="btn-track-exception" data-role="button">Track Exception</button>
+            <button class="btn-track-event" data-role="button">Track Event</button>
+            <button class="btn-track-trace" data-role="button">Track Trace</button>
+            <button class="btn-track-metric" data-role="button">Track Metric</button>
+            </div>
             </div>
         </div>
-        <!-- /content -->
+       
     </div>
-    <!-- /page -->
+  
 
 
     <div data-role="page" id="stock">
         <div data-role="header" data-add-back-btn="true">
         
-            <h1 id="stock-h1">...</h1>
+            <h1 id="stock-h1">Stock information</h1>
         </div>
-        <!-- /header -->
+        
         <div role="main" class="ui-content">
            <div id="stock-price"></div>
+           <div id="stock-price-change"></div>
+           
+           <div data-role="controlgroup" data-type="horizontal">
+            <button class="btn-track-exception" data-role="button">Track Exception</button>
+            <button class="btn-track-event" data-role="button">Track Event</button>
+            <button class="btn-track-trace" data-role="button">Track Trace</button>
+              <button class="btn-track-metric" data-role="button">Track Metric</button>
+            </div>
         </div>
-        <!-- /content -->
+        
+        
+      
     </div>
 
 
     <div data-role="page" id="dlg">
-        <div data-role="header">
-            <h1>...</h1>
+         <div data-role="header" data-add-back-btn="true">
+            <h1>Dialog page</h1>
         </div>
-        <!-- /header -->
+       
         <div role="main" class="ui-content">
-            <p><a href="#home">Back home</a></p>
+             <div data-role="controlgroup" data-type="horizontal">
+            <button class="btn-track-exception" data-role="button">Track Exception</button>
+            <button class="btn-track-event" data-role="button">Track Event</button>
+            <button class="btn-track-trace" data-role="button">Track Trace</button>
+            <button class="btn-track-metric" data-role="button">Track Metric</button>
+            </div>
         </div>
-        <!-- /content -->
+       
     </div>
+    
+    <script type="text/javascript">
+        $(".btn-track-exception").click(function(){
+           window.appInsights.trackException("Exception on ")+window.pageInfo;
+        });
+          $(".btn-track-event").click(function(){
+              window.appInsights.trackEvent("MyCustomEvent",{pageInfo:window.pageInfo}); 
+        });
+          $(".btn-track-trace").click(function(){
+           window.appInsights.trackTrace("Some trace information");
+        });
+          $(".btn-track-metric").click(function(){
+             window.appInsights.trackMetric("Metric"+window.pageInfo, Math.random());
+        });
+    </script>
 
-</body>
+    </body>
+
 </html>
