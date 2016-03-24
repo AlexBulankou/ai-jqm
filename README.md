@@ -7,6 +7,10 @@ You can see a working example, directly loading the sample page from this repo: 
 
 This assumes you already have your Application Insights JavaScript snippet on the page, if not [please follow the steps here](https://github.com/AlexBulankou/ai-jqm/wiki/Getting-ApplicationInsights-JavaScript-snippet).
 
+Insert ai-jqm script after jQuery Mobile script and after Application Insights snippet. You can use cdn.rawgit.com and reference the latest tagged version: https://cdn.rawgit.com/AlexBulankou/ai-jqm/v0.9/scripts/ai-jqm.min.js
+
+![snippet](https://bit4ka.dm2303.df.livefilestore.com/y3mcgAtuj4SephOr-hMqG39jCuAa91VAL8fm51vwCRsv9iIwx55buuzQAHu1_Qx4FVQtMXaf1QUacsSl_bB2iYeACittfA6quR_G3UiZGf2vlcgRxV6WNatwNtAqDfICrkKWDbPIlK8xPVA_vW_3iQ9tA?width=942&height=600&cropmode=none)
+
 ##Appendix A. Page lifecyle reference for JQM (copied from mobile router project)
 * bc  => pagebeforecreate
 * c   => pagecreate
