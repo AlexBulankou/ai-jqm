@@ -17,18 +17,3 @@ That's it - you're done! Try opening virtual pages of your JQM application and i
 
 This allows you to easily view usage and loading performance for each of the JQM routes and, more importantly, you can view all telemetry that was logged for a particular route:
 ![correlation](https://oz8fmw.dm2303.df.livefilestore.com/y3mU5-u14EDB1Y4zICbcDDBIDaL4IkErdatd9d17SUDIDEQD8EqzIYluJmQBFi0fiasguEKc-tcxWRE9rLL4J-JF-X9Nm5kB12wglCD2H6qKS7bgLiHIMhqRH6nTPPkfTBx2w8Owc-Omp3dVM4xIBwlww?width=1024&height=802&cropmode=none)
-
-
-
-##Appendix A. Page lifecyle reference for JQM (copied from mobile router project)
-* bc  => pagebeforecreate
-* c   => pagecreate
-* i   => pageinit
-* bs  => pagebeforeshow
-* s   => pageshow
-* bh  => pagebeforehide
-* h   => pagehide
-* rm  => pageremove
-* bC  => pagebeforechange
-* bl  => pagebeforeload
-* l   => pageload
