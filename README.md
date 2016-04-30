@@ -12,7 +12,7 @@ Insert ai-jqm script after jQuery Mobile script and after Application Insights s
 
 ![snippet](https://bit4ka.dm2303.df.livefilestore.com/y3mNTiIVA2dhr_MJA_QTnbl-P3_YnN_bJKe34qPFZqxuKdpKgEbRSUBGJvUeMRsGVl6P8SKhDJAawuaGYDHAXax1w9wjf56I5bpSmS98_PfC27xX7P-gpLfCvUq5dqW3fcBcWzLWmZnxNs8MsVfPJBUsw?width=942&height=336&cropmode=none)
 
-That's it - you're done! Try opening virtual pages of your JQM application and in your Application Insights resource you will see telemetry grouped according to JQM virtual page. For example, this is the telemetry I'm seeing for [http://rawgit.com/AlexBulankou/ai-jqm/master/eg/sample1.html](this application):
+That's it - you're done! Try opening virtual pages of your JQM application and in your Application Insights resource you will see telemetry grouped according to JQM virtual page. For example, this is the telemetry I'm seeing for [this application](http://rawgit.com/AlexBulankou/ai-jqm/master/eg/sample1.html):
 
 ![telemetry grouped by JQM page](https://pbth1q.dm2303.df.livefilestore.com/y3m4sQrj-il72VlNfhO8igE-fn1s_AU9F-NovqQybdIQYOUBU45DpWbvhFknzbTIzCL0AsGW-IS1QoaHZEaUcT3b4SL-X-jxRD96PX2XFT0AEdWGVNWNXQrgJ0Vv4qvdFsLJZJVWWoEcJsnXPuB1O1srA?width=826&height=569&cropmode=none)
 
